@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbAlert, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { PagingModel } from '../models/paging-model';
 import { ProductViewModel } from '../models/product-view-model';
 import { ProductService } from '../product.service';
 
@@ -20,18 +21,21 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
   products: ProductViewModel[] = [];
   currentProduct:any;
-
+  pageNumber: number = 1;
+  pagination: PagingModel | undefined ;
   constructor(private _productService: ProductService, config: NgbModalConfig, private modalService: NgbModal, private router: Router) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
    ngOnInit(): void {
-     this.getProducts();
+     this.getProducts(this.pageNumber);
    }
 
-  getProducts(){
-    this._productService.getProducts().subscribe(res=>{
-      this.products = res;
+  getProducts(pageNumber:number){
+    this._productService.getProducts(pageNumber).subscribe(res=>{
+      this.products = res.items;
+      this.pagination = {currentPage: res.currentPage, totalPages: res.totalPages, totalItems:res.totalItems};
+      console.log(this.pagination);
     });
   }
   newProduct(){
@@ -61,4 +65,10 @@ export class ProductsComponent implements AfterViewInit, OnInit {
         })
   }
   ngAfterViewInit() {}
+
+  pageChanged(event:any){
+    this.pageNumber = event.page;
+    this.getProducts(this.pageNumber);
+    
+  }
 }

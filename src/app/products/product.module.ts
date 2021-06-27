@@ -8,6 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 const routes: Routes = [
   {
@@ -31,7 +32,8 @@ const routes: Routes = [
     NgbModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    PaginationModule.forRoot()
   ]
 })
 export class ProductModule { }
