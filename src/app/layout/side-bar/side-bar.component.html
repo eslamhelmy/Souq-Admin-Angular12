@@ -1,5 +1,54 @@
-<div class="side-bar">
+<!-- <div class="side-bar">
     <a class="link-primary" (click)="openProducts()">products</a>
     <a class="link-primary"(click)="openOrders()">orders</a>
-</div>
+</div> -->
   
+
+<header class="header " style="position: fixed;height: 3em;
+width: 100%;">
+    <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 ">
+      <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars "></span></a> </div>
+      <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
+ 
+    </div>
+  </nav>
+</header>
+
+<div class="row">
+    
+   
+      <div class="c-4" style="margin-top: 40px;">
+        <div class="sidebar-container">
+            <div class="sidebar-logo">
+             SOUQ ADMIN
+            </div>
+            <ul class="sidebar-navigation">
+              <li class="header">Navigation</li>
+           
+         
+              <li>
+                <a href="/products">
+                  <i class="fa fa-cog" aria-hidden="true"></i> Products
+                </a>
+              </li>
+              <li>
+                <a href="/orders">
+                  <i class="fa fa-info-circle" aria-hidden="true"></i> Orders
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+        
+      </div>
+
+      <div class="c-8" style="    padding-left: 19em;
+      padding-top: 4em;">
+          
+
+            <router-outlet></router-outlet> 
+  
+      </div>
+   
+      
+</div>
