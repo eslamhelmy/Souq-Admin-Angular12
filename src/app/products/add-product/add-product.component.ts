@@ -12,7 +12,7 @@ import { ProductService } from '../product.service';
 })
 export class AddProductComponent implements OnInit {
   submitted = false;
-  model: Product = {id:0, name:'', description:'',price:0,categoryId:0};
+  model: Product = {id:0, name:'', description:'',price:undefined,categoryId:undefined};
   categories: Category[] = [];
   fileName: string='';
   image: any;

@@ -18,7 +18,7 @@
         <td>{{order.price}}</td>
         <td>
             <!-- (click)="open(content, product) -->
-          <button class="btn btn-outline-primary mb-2 mr-2" (click)="open(content,order)">Set Special Offer</button>
+          <button class="btn btn-outline-primary mb-2 mr-2" [disabled]="order.quantity<2" (click)="open(content,order)">Set Special Offer</button>
   
         </td>
       </tr>

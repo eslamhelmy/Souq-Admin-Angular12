@@ -33,6 +33,7 @@ export class OrdersComponent implements OnInit {
           if(x){
             this.currentOrder.price = price;
             //popup here
+            this.modalService.dismissAll();
             console.log(x.data);
           }else{
             //popup error
