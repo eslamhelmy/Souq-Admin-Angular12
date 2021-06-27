@@ -1,0 +1,51 @@
+<button type="button" class="btn btn-default" (click)="newProduct()">New Product</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Discount</th>
+      <th scope="col">New Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = 'let product of products'>
+      <!-- <app-product [product] ='product'></app-product> -->
+      <th scope="row">{{product.name}}</th>
+      <td>{{product.price}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.discountPercentage}}</td>
+      <td>{{product.newPrice}}</td>
+      <td>
+        <button class="btn btn-outline-primary mb-2 mr-2" (click)="open(content, product)">Set Offer</button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Enter Percentage For {{currentProduct.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="0" min=1 max=100 #percentage>
+        <span matPrefix>%&nbsp;</span>
+        <!-- <span matSuffix>.00</span> -->
+      </mat-form-field>
+      </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="saveOffer(percentage.value)">Save</button>
+    <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+  </div>
+</ng-template>
