@@ -34,10 +34,8 @@ export class OrdersComponent implements OnInit {
             this.currentOrder.price = price;
             //popup here
             console.log(x.data);
-            alert('success');
           }else{
             //popup error
-            alert('error');
           }
         })
   }

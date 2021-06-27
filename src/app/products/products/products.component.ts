@@ -69,11 +69,9 @@ export class ProductsComponent implements AfterViewInit, OnInit {
             this.currentProduct.newPrice = x.data;
             //popup here
             console.log(x.data);
-            alert('success');
             this.mode.close();
           }else{
             //popup error
-            alert('error');
           }
         })
   }
