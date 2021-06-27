@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbAlert, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Category } from '../models/category';
 import { PagingModel } from '../models/paging-model';
 import { ProductViewModel } from '../models/product-view-model';
 import { ProductService } from '../product.service';
@@ -23,16 +24,19 @@ export class ProductsComponent implements AfterViewInit, OnInit {
   currentProduct:any;
   pageNumber: number = 1;
   pagination: PagingModel | undefined ;
+  categoryId: number = -1;
+   categories: Category[]=[];
   constructor(private _productService: ProductService, config: NgbModalConfig, private modalService: NgbModal, private router: Router) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
    ngOnInit(): void {
-     this.getProducts(this.pageNumber);
+     this.getCategories();
+     this.getProducts(this.pageNumber,this.categoryId);
    }
 
-  getProducts(pageNumber:number){
-    this._productService.getProducts(pageNumber).subscribe(res=>{
+  getProducts(pageNumber:number , category:any){
+    this._productService.getProducts(pageNumber,category).subscribe(res=>{
       this.products = res.items;
       this.pagination = {currentPage: res.currentPage, totalPages: res.totalPages, totalItems:res.totalItems};
       console.log(this.pagination);
@@ -40,6 +44,13 @@ export class ProductsComponent implements AfterViewInit, OnInit {
   }
   newProduct(){
     this.router.navigate(['/products/add']);
+  }
+
+  
+  getCategories(){
+    this._productService.getCategories().subscribe(x=> {
+      this.categories = x;
+    })
   }
   open(content:any, product:ProductViewModel) {
     console.log('clicked');
@@ -68,7 +79,15 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
   pageChanged(event:any){
     this.pageNumber = event.page;
-    this.getProducts(this.pageNumber);
+    this.getProducts(this.pageNumber,this.categoryId);
     
+  }
+
+  resetFilters(){
+    this.categoryId= -1;
+  }
+
+  loadProducts(){
+    this.getProducts(this.pageNumber,this.categoryId);
   }
 }

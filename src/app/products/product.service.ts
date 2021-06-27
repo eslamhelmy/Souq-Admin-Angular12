@@ -22,8 +22,9 @@ export class ProductService {
     })
   }  
 
-  getProducts(pageNumber: number): Observable<any> {
-    return this.httpClient.get<any>(this.endPoint + '/getproducts?pageNumber='+pageNumber)
+  getProducts(pageNumber: number,category:number): Observable<any> {
+    
+    return this.httpClient.get<any>(this.endPoint + '/getproducts?pageNumber='+pageNumber+'&categoryId='+category)
     .pipe(
       retry(1),
       catchError(this.httpError)
