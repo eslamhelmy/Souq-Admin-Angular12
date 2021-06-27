@@ -26,6 +26,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
   pagination: PagingModel | undefined ;
   categoryId: number = -1;
    categories: Category[]=[];
+   mode: any;
   constructor(private _productService: ProductService, config: NgbModalConfig, private modalService: NgbModal, private router: Router) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -55,7 +56,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
   open(content:any, product:ProductViewModel) {
     console.log('clicked');
     this.currentProduct = product;
-    this.modalService.open(content);
+    this.mode=this.modalService.open(content);
   }
 
   saveOffer(percentage:string){
@@ -69,6 +70,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
             //popup here
             console.log(x.data);
             alert('success');
+            this.mode.close();
           }else{
             //popup error
             alert('error');
@@ -85,6 +87,7 @@ export class ProductsComponent implements AfterViewInit, OnInit {
 
   resetFilters(){
     this.categoryId= -1;
+    this.loadProducts();
   }
 
   loadProducts(){

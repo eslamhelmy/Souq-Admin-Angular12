@@ -1,14 +1,15 @@
-<table class="table">
-    <thead>
+<table class="table" style="    width: 98%;">
+    <thead style="background: #3c8dbc;
+    color: #f8f9fa;">
       <tr>
         <th scope="col">Customer Name</th>
         <th scope="col">Product Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Price</th>
-        <th scope="col">Actions</th>
+        <th scope="col" style="min-width: 9em;">Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="background: #edeff2;">
       <tr *ngFor = 'let order of orders'>
         <!-- <app-product [product] ='product'></app-product> -->
         <th scope="row">{{order.customerName}}</th>
@@ -26,7 +27,7 @@
   
 
   <ng-template #content let-modal>
-    <div class="modal-header">
+    <div class="modal-header pop-header">
       <h4 class="modal-title">Enter New Price </h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
@@ -43,7 +44,7 @@
         </p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="setSpecialOffer(price.value)">Save</button>
+      <button type="button" class="btn" style="background: #3c8dbc;" (click)="setSpecialOffer(price.value)">Save</button>
       <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>  -->
     </div>
   </ng-template> 
